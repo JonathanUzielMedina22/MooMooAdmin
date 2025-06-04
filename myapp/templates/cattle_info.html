@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %} {% if user.is_authenticated %} Editar Animal {% else %} Acceso Denegado {% endif %} {% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    <h1 class="my-5 display-1">Edite los datos del animal {{animal.codigo_arete}}</h1>
+
+    {{ error }}
+    
+    <main class="container mb-3 text-start">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form action="" class="card card-body form" method="POST">
+                    {{error}}
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    
+                    <div class="mt-3 d-flex mx-auto gap-3">
+                        <button class="btn btn-secondary text-light ">Actualizar</button>
+                        <button type="reset" class="btn btn-secondary text-light" onclick="window.location.href = '/dashboard/cattle/'">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+    </main>
+
+{% else %}
+    <h1 class="my-5 display-1">Acceso denegado</h1>
+
+    <p>
+        Debe registrarse y/o iniciar sesión para tener acceso a esta página.
+    </p>
+    
+    <div class="acceso_denegado"></div>
+{% endif %}
+{% endblock %}
